@@ -6,8 +6,6 @@
 	public int Damage { get; private set; }
 	public string Sprite { get; private set; }
 
-	//public delegate void 
-
 	protected Unit(byte id,int hp, int damage, string linkToSprite)
 	{
 		ID = id;

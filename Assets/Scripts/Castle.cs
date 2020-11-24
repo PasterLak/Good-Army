@@ -2,17 +2,17 @@
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Castle : MonoBehaviour
+public sealed class Castle : MonoBehaviour
 {
 
 	public static Castle Instance;
-
 
 	[SerializeField] private Text citizensUIText;
 	[SerializeField] private Text soldiersUIText;
 	
 
 	private int _citizens = 0;
+
 	public int CitizensCount
 	{
 		get { return _citizens; }
@@ -20,6 +20,7 @@ public class Castle : MonoBehaviour
 
 	private void Awake()
 	{
+		if(Instance == null)
 		Instance = this;
 		
 		if (citizensUIText == null || soldiersUIText == null )

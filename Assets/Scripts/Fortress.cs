@@ -7,15 +7,14 @@ public sealed class Fortress : MonoBehaviour
     public int Hp { get; private set; } = 1000;
     
     [Header("UI Objects")] 
-    public Slider HpSlider;
-    public GameObject VictoryWindow;
-    public GameObject gold;
-    public Button closeVictoryWindow;
-    public Image face;
-    public Text[] texts;
-    [Header("Other")] 
-    public Animator animator;
-
+    [SerializeField] private Slider HpSlider;
+    [SerializeField] private GameObject VictoryWindow;
+    [SerializeField] private GameObject gold;
+    [SerializeField] private Button closeVictoryWindow;
+    [SerializeField] private Image face;
+    [SerializeField] private Text[] texts;
+    [Header("Other")]
+    [SerializeField] private Animator animator;
     
     private string[] messages = {"Please no!", "Stop that!", "Give up!",
         "I will defeat you!", "There is no turning back!", "Show me what you are capable of!",
@@ -26,10 +25,13 @@ public sealed class Fortress : MonoBehaviour
         
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
 
-        if (VictoryWindow != null || closeVictoryWindow != null || HpSlider != null || gold != null || face != null)
+        if (VictoryWindow != null || closeVictoryWindow != null ||
+            HpSlider != null || gold != null || face != null)
         {
+
             HpSlider.maxValue = Hp;
             HpSlider.value = Hp;
             
@@ -60,6 +62,7 @@ public sealed class Fortress : MonoBehaviour
             Hp = 0;
             Destroy();
         }
+
         UpdateUI();
 
     }

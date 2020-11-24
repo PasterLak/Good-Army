@@ -18,10 +18,12 @@ public sealed class Game : MonoBehaviour
 	
 	private Army _army;
 	private int _size = 0;
-	
+
+
 	private void Awake ()
 	{
-		Instance = this;
+		if (Instance == null)
+			Instance = this;
 		
 	   if (inputField != null || buttonCreateArmy != null || buttonDisbandArmy != null || buttonAttack != null || buttonRestart != null)
 	   {
@@ -96,7 +98,7 @@ public sealed class Game : MonoBehaviour
 	   
 		parts[ Random.Range(0, UnitsData.TypesCount ) ] += remainder;
 
-		_army = new Army {troopCount = troopCount, troopSprite = troopSprite};
+		_army = new Army(troopCount, troopSprite);
 		
 		buttonAttack.gameObject.SetActive(true);
 
@@ -152,14 +154,14 @@ public sealed class Game : MonoBehaviour
 				error = true;
 				return 0;
 		}
-		if(_army.troops[slotID] == null) 
+		if(_army.Troops[slotID] == null) 
 		{
 			error = true;
 			return 0;
 		}
 
 		error = false;
-		return _army.troops[slotID].UnitID;
+		return _army.Troops[slotID].UnitID;
 
 	}
 
