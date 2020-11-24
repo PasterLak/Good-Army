@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 public sealed class Game : MonoBehaviour
 {
 	public static Game Instance;
-	
-	public InputField inputField;
+
+	[SerializeField] private InputField inputField;
 	[Header("UI Buttons")]
-	public Button buttonCreateArmy;
-	public Button buttonDisbandArmy;
-	public Button buttonAttack;
-	public Button buttonRestart;
-	[Header("Army UI Objects")] 
-	public Image[] troopSprite;
-	public Text[] troopCount;
+	[SerializeField] private Button buttonCreateArmy;
+	[SerializeField] private Button buttonDisbandArmy;
+	[SerializeField] private Button buttonAttack;
+	[SerializeField] private Button buttonRestart;
+	[Header("Army UI Objects")]
+	[SerializeField] private Image[] troopSprite;
+	[SerializeField] private Text[] troopCount;
 	
 	private Army _army;
 	private int _size = 0;
@@ -122,6 +122,7 @@ public sealed class Game : MonoBehaviour
 		if(_army == null) return;
 		Fortress.Instance.SetDamage( Random.Range(5, 25 + _army.UnitsCount / 10) );
 	}
+
 	public void DisbandArmy()
 	{
 		if (_army == null) return;
@@ -166,4 +167,5 @@ public sealed class Game : MonoBehaviour
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
+
 }

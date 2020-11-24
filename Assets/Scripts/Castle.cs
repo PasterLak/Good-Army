@@ -6,11 +6,10 @@ public class Castle : MonoBehaviour
 {
 
 	public static Castle Instance;
-	
-	[SerializeField]
-	private Text citizensUIText;
-	[SerializeField]
-	private Text soldiersUIText;
+
+
+	[SerializeField] private Text citizensUIText;
+	[SerializeField] private Text soldiersUIText;
 	
 
 	private int _citizens = 0;

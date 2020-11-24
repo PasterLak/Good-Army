@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]
-    private byte _slot_ID = 0;
+  
+    [SerializeField] private byte _slot_ID = 0;
 
     private static GameObject infoWindow;
     private static RectTransform infoWindowRect;

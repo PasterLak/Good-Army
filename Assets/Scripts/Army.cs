@@ -9,7 +9,7 @@ public sealed class Army
 	public Image[] troopSprite;
 	public Text[] troopCount;
 
-	public Troop[] troops = new Troop[MaxTroopsCount];
+	private Troop[] troops = new Troop[MaxTroopsCount]; // set get
 	
 
 	public void AddTroop( int count, byte unitID)
