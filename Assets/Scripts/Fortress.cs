@@ -7,16 +7,16 @@ public sealed class Fortress : MonoBehaviour
     public int Hp { get; private set; } = 1000;
     
     [Header("UI Objects")] 
-    [SerializeField] private Slider HpSlider;
-    [SerializeField] private GameObject VictoryWindow;
-    [SerializeField] private GameObject gold;
-    [SerializeField] private Button closeVictoryWindow;
-    [SerializeField] private Image face;
-    [SerializeField] private Text[] texts;
+    [SerializeField] private Slider _hpSlider;
+    [SerializeField] private GameObject _victoryWindow;
+    [SerializeField] private GameObject _gold;
+    [SerializeField] private Button _closeVictoryWindow;
+    [SerializeField] private Image _face;
+    [SerializeField] private Text[] _texts;
     [Header("Other")]
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator _animator;
     
-    private string[] messages = {"Please no!", "Stop that!", "Give up!",
+    private string[] _messages = {"Please no!", "Stop that!", "Give up!",
         "I will defeat you!", "There is no turning back!", "Show me what you are capable of!",
         "And it's all?", "Stop pressing the button!", "Victory will be mine!", "My army is stronger!"};
 
@@ -28,17 +28,17 @@ public sealed class Fortress : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        if (VictoryWindow != null || closeVictoryWindow != null ||
-            HpSlider != null || gold != null || face != null)
+        if (_victoryWindow != null || _closeVictoryWindow != null ||
+            _hpSlider != null || _gold != null || _face != null)
         {
 
-            HpSlider.maxValue = Hp;
-            HpSlider.value = Hp;
+            _hpSlider.maxValue = Hp;
+            _hpSlider.value = Hp;
             
-            closeVictoryWindow.onClick.AddListener(CloseVictoryWindow);
+            _closeVictoryWindow.onClick.AddListener(CloseVictoryWindow);
             
-            gold.SetActive(false);
-            VictoryWindow.SetActive(false);
+            _gold.SetActive(false);
+            _victoryWindow.SetActive(false);
             
         }
         else
@@ -54,7 +54,7 @@ public sealed class Fortress : MonoBehaviour
         if (Hp - damage > 0)
         {
             Hp -= damage;
-            animator.Play("fortressHit");
+            _animator.Play("fortressHit");
             ShowMessage();
         }
         else
@@ -70,19 +70,19 @@ public sealed class Fortress : MonoBehaviour
     private void ShowMessage()
     {
         restart :
-        var i = Random.Range(0, texts.Length);
+        var i = Random.Range(0, _texts.Length);
         if (i == _lastRandomText) 
             goto restart;
        
         start :
-        var r = Random.Range(0, messages.Length);
+        var r = Random.Range(0, _messages.Length);
         if (r == _lastRandomMessage) 
             goto start;
         
-        texts[i].text = messages[r];
-        texts[i].gameObject.SetActive(true);
+        _texts[i].text = _messages[r];
+        _texts[i].gameObject.SetActive(true);
         
-        var founded = texts[i].TryGetComponent(out Reset reset);
+        var founded = _texts[i].TryGetComponent(out Reset reset);
         if (founded) reset.time = Random.Range(0.5f, 1.2f);
         
         _lastRandomMessage = r;
@@ -92,20 +92,20 @@ public sealed class Fortress : MonoBehaviour
 
     private void UpdateUI()
     {
-        HpSlider.value = Hp;
+        _hpSlider.value = Hp;
     }
 
     private void Destroy()
     {
-        face.sprite = Resources.Load<Sprite>("happyFace");
+        _face.sprite = Resources.Load<Sprite>("happyFace");
         
-        gold.SetActive(true);
-        VictoryWindow.SetActive(true);
+        _gold.SetActive(true);
+        _victoryWindow.SetActive(true);
     }
 
     public void CloseVictoryWindow()
     {
-        VictoryWindow.SetActive(false);
+        _victoryWindow.SetActive(false);
     }
    
 }

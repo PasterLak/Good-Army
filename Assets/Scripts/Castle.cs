@@ -7,8 +7,8 @@ public sealed class Castle : MonoBehaviour
 
 	public static Castle Instance;
 
-	[SerializeField] private Text citizensUIText;
-	[SerializeField] private Text soldiersUIText;
+	[SerializeField] private Text _citizensUIText;
+	[SerializeField] private Text _soldiersUIText;
 	
 
 	private int _citizens = 0;
@@ -23,7 +23,7 @@ public sealed class Castle : MonoBehaviour
 		if(Instance == null)
 		Instance = this;
 		
-		if (citizensUIText == null || soldiersUIText == null )
+		if (_citizensUIText == null || _soldiersUIText == null )
 		{
 			Debug.LogError("Object reference is null!");
 		}
@@ -41,12 +41,12 @@ public sealed class Castle : MonoBehaviour
 		
 		if (_citizens < 0) _citizens = 0;
 
-		citizensUIText.text = "Citizens: \n" +  _citizens;
+		_citizensUIText.text = "Citizens: \n" +  _citizens;
 	}
 
 	public void UpdateSoldiersCount(int count)
 	{
-		soldiersUIText.text = "Soldiers: \n" +  count;
+		_soldiersUIText.text = "Soldiers: \n" +  count;
 	}
 
 }

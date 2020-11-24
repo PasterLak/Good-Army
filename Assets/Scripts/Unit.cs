@@ -1,33 +1,36 @@
 ﻿
  public abstract class Unit 
 {
-	public int ID { get; private set; }
-	public int Hp { get; private set; }
-	public int Damage { get; private set; }
-	public string Sprite { get; private set; }
+	protected int id { get; private set; }
+	protected int hp { get; private set; }
+	protected int damage { get; private set; }
+	public string sprite { get; private set; }
+
+	public delegate void EventHandler();
+	public event EventHandler OnDied;
 
 	protected Unit(byte id,int hp, int damage, string linkToSprite)
 	{
-		ID = id;
-		Hp = hp;
-		Damage = damage;
-		Sprite = linkToSprite;
+		this.id = id;
+		this.hp = hp;
+		this.damage = damage;
+		sprite = linkToSprite;
 	}
 	
 	public void SetDamage (int damage)
 	{
-		Hp -= damage;
-		if (Hp <= 0) Death();
+		hp -= damage;
+		if (hp <= 0) Death();
 
 	}
 	private void Death()
 	{
-		
+		OnDied?.Invoke();
 	}
 	
 	public override string ToString()
 	{
-		return   $"{Sprite} ( ID : {ID}) \nHP : {Hp} \nDamage : {Damage}";
+		return   $"{sprite} ( ID : {id}) \nHP : {hp} \nDamage : {damage}";
 	}
 	
 	protected abstract void Attack();
