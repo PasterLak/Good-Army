@@ -25,7 +25,12 @@ public sealed class Game : MonoBehaviour
 		if (Instance == null)
 			Instance = this;
 		
-	   if (inputField != null || buttonCreateArmy != null || buttonDisbandArmy != null || buttonAttack != null || buttonRestart != null)
+	   if (inputField == null || buttonCreateArmy == null || buttonDisbandArmy == null ||
+			buttonAttack == null || buttonRestart == null)
+		{
+			Debug.LogError("Object reference is null!");
+		}
+	   else
 	   {
 		   inputField.contentType = InputField.ContentType.IntegerNumber;
 		   inputField.onEndEdit.AddListener(SetArmySize);
@@ -41,10 +46,7 @@ public sealed class Game : MonoBehaviour
 		   buttonRestart.onClick.AddListener(RestartGame);
 		 
 	   }
-	   else
-	   {
-		   Debug.LogError("Object reference is null!");
-	   }
+	  
 	}
 
 

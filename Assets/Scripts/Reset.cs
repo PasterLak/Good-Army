@@ -3,10 +3,15 @@
 public class Reset : MonoBehaviour
 {
    
-    public float time = 0;
+    public float TimerTime { get; set; }
+     
     private void Update()
     {
-        if (time > 0) time -= Time.deltaTime;
-        if (time <= 0) gameObject.SetActive(false);
+        if (TimerTime > 0)
+            TimerTime -= Time.deltaTime;
+
+        if (TimerTime <= 0)
+            gameObject.SetActive(false);
     }
+
 }
