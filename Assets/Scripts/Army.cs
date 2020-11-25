@@ -58,7 +58,7 @@ public sealed class Army
 
 	private void UpdateUI(int slotID, byte unitID)
 	{
-		_troopSprite[slotID].sprite = Resources.Load<Sprite>(UnitsData.GetUnit(unitID).sprite);
+		_troopSprite[slotID].sprite = Resources.Load<Sprite>(UnitsData.GetUnit(unitID).Sprite);
 		_troopCount[slotID].text = _troops[slotID].Count.ToString();
 	}
 

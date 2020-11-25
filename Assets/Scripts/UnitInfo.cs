@@ -7,33 +7,33 @@ public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
   
     [SerializeField] private byte _slot_ID = 0;
 
-    private static GameObject _infoWindow;
-    private static RectTransform _infoWindowRect;
-    private static Text _infoText;
+    private static GameObject infoWindow;
+    private static RectTransform infoWindowRect;
+    private static Text infoText;
    
     private void Awake()
     {
 
-        if (_infoWindow == null)
+        if (infoWindow == null)
         {
-            _infoWindow = Instantiate((Resources.Load<GameObject>("InfoWindow")));
-            _infoWindow.transform.SetParent(GameObject.Find("Canvas").transform);
-            _infoWindowRect = _infoWindow.GetComponent<RectTransform>();
-            _infoWindow.SetActive(false);
+            infoWindow = Instantiate((Resources.Load<GameObject>("InfoWindow")));
+            infoWindow.transform.SetParent(GameObject.Find("Canvas").transform);
+            infoWindowRect = infoWindow.GetComponent<RectTransform>();
+            infoWindow.SetActive(false);
         }
            
-        if(_infoText == null && _infoWindow != null)
-            _infoText = _infoWindow.transform.Find("Text").GetComponent<Text>();
+        if(infoText == null && infoWindow != null)
+            infoText = infoWindow.transform.Find("Text").GetComponent<Text>();
         
     }
 
     private void Update()
     {
-        if (_infoWindow.activeSelf)
+        if (infoWindow.activeSelf)
         {
-            _infoWindowRect.position = new Vector3( 
-                Input.mousePosition.x + _infoWindowRect.rect.width / 2, 
-                Input.mousePosition.y + _infoWindowRect.rect.height / 2,
+            infoWindowRect.position = new Vector3( 
+                Input.mousePosition.x + infoWindowRect.rect.width / 2, 
+                Input.mousePosition.y + infoWindowRect.rect.height / 2,
                    Input.mousePosition.z);
         }
     }
@@ -44,8 +44,8 @@ public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
         if (error == false)
         {
-            _infoWindow.gameObject.SetActive(true);
-            _infoText.text = UnitsData.GetUnit(_unitID).ToString();
+            infoWindow.gameObject.SetActive(true);
+            infoText.text = UnitsData.GetUnit(_unitID).ToString();
         }
           
     }
@@ -53,7 +53,7 @@ public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
        
-        _infoWindow.gameObject.SetActive(false);
+        infoWindow.gameObject.SetActive(false);
     }
     
     

@@ -6,15 +6,15 @@ public sealed class Game : MonoBehaviour
 {
 	public static Game Instance;
 
-	[SerializeField] private InputField _inputField;
+	[SerializeField] private InputField inputField;
 	[Header("UI Buttons")]
-	[SerializeField] private Button _buttonCreateArmy;
-	[SerializeField] private Button _buttonDisbandArmy;
-	[SerializeField] private Button _buttonAttack;
-	[SerializeField] private Button _buttonRestart;
+	[SerializeField] private Button buttonCreateArmy;
+	[SerializeField] private Button buttonDisbandArmy;
+	[SerializeField] private Button buttonAttack;
+	[SerializeField] private Button buttonRestart;
 	[Header("Army UI Objects")]
-	[SerializeField] private Image[] _troopSprite;
-	[SerializeField] private Text[] _troopCount;
+	[SerializeField] private Image[] troopSprite;
+	[SerializeField] private Text[] troopCount;
 	
 	private Army _army;
 	private int _size = 0;
@@ -25,20 +25,20 @@ public sealed class Game : MonoBehaviour
 		if (Instance == null)
 			Instance = this;
 		
-	   if (_inputField != null || _buttonCreateArmy != null || _buttonDisbandArmy != null || _buttonAttack != null || _buttonRestart != null)
+	   if (inputField != null || buttonCreateArmy != null || buttonDisbandArmy != null || buttonAttack != null || buttonRestart != null)
 	   {
-		   _inputField.contentType = InputField.ContentType.IntegerNumber;
-		   _inputField.onEndEdit.AddListener(SetArmySize);
+		   inputField.contentType = InputField.ContentType.IntegerNumber;
+		   inputField.onEndEdit.AddListener(SetArmySize);
 		   
-		   _buttonCreateArmy.onClick.AddListener(CreateRandomArmy);
+		   buttonCreateArmy.onClick.AddListener(CreateRandomArmy);
 		   
-		   _buttonDisbandArmy.onClick.AddListener(DisbandArmy);
-		   _buttonDisbandArmy.gameObject.SetActive(false);
+		   buttonDisbandArmy.onClick.AddListener(DisbandArmy);
+		   buttonDisbandArmy.gameObject.SetActive(false);
 		   
-		   _buttonAttack.onClick.AddListener(Attack);
-		   _buttonAttack.gameObject.SetActive(false);
+		   buttonAttack.onClick.AddListener(Attack);
+		   buttonAttack.gameObject.SetActive(false);
 		   
-		   _buttonRestart.onClick.AddListener(RestartGame);
+		   buttonRestart.onClick.AddListener(RestartGame);
 		 
 	   }
 	   else
@@ -62,12 +62,12 @@ public sealed class Game : MonoBehaviour
 			{
 				_size = Castle.Instance.CitizensCount;
 			}
-			_inputField.text = _size.ToString();
+			inputField.text = _size.ToString();
 		}
 		else
 		{
 			_size = UnitsData.TypesCount;
-			_inputField.text = _size.ToString();
+			inputField.text = _size.ToString();
 		}
 	   
 	}
@@ -98,9 +98,9 @@ public sealed class Game : MonoBehaviour
 	   
 		parts[ Random.Range(0, UnitsData.TypesCount ) ] += remainder;
 
-		_army = new Army(_troopCount, _troopSprite);
+		_army = new Army(troopCount, troopSprite);
 		
-		_buttonAttack.gameObject.SetActive(true);
+		buttonAttack.gameObject.SetActive(true);
 
 		for (byte i = 0; i < UnitsData.TypesCount; i++)
 		{
@@ -110,11 +110,11 @@ public sealed class Game : MonoBehaviour
 		
 		Castle.Instance.UpdateSoldiersCount(_army.UnitsCount);
 		
-	    _inputField.text = "0";
+	    inputField.text = "0";
 	    _size = 0;
 	    
-		_buttonCreateArmy.gameObject.SetActive(false);
-		_buttonDisbandArmy.gameObject.SetActive(true);
+		buttonCreateArmy.gameObject.SetActive(false);
+		buttonDisbandArmy.gameObject.SetActive(true);
 
 	}
 	
@@ -134,9 +134,9 @@ public sealed class Game : MonoBehaviour
 		
 		Castle.Instance.UpdateSoldiersCount(0);
 		
-		_buttonCreateArmy.gameObject.SetActive(true);
-		_buttonDisbandArmy.gameObject.SetActive(false);
-		_buttonAttack.gameObject.SetActive(false);
+		buttonCreateArmy.gameObject.SetActive(true);
+		buttonDisbandArmy.gameObject.SetActive(false);
+		buttonAttack.gameObject.SetActive(false);
 
 	}
 
