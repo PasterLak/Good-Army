@@ -41,11 +41,11 @@ public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         
-        byte _unitID = Game.Instance.GetUnitIDInArmy(_slotID, out var error);
+        byte _unitID = Game.Instance.GetUnitIDInArmy(_slotID, out bool error);
         
         if (error == false)
         {
-            _infoWindow.gameObject.SetActive(true);
+            _infoWindow.SetActive(true);
             _infoText.text = UnitsData.GetUnit(_unitID).ToString();
         }
           
@@ -54,7 +54,7 @@ public class UnitInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
        
-        _infoWindow.gameObject.SetActive(false);
+        _infoWindow.SetActive(false);
     }
     
     

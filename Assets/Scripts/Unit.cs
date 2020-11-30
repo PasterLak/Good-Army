@@ -1,7 +1,7 @@
 ﻿
  public abstract class Unit 
 {
-	public int ID { get; private set; }
+	public readonly byte ID;
 	public int Hp { get; private set; }
 	public int Damage { get; private set; }
 	public string Sprite { get; private set; }

@@ -150,7 +150,6 @@ public sealed class Game : MonoBehaviour
 			return 0;
 		}
 		
-		
 		if(slotID >= Army.MaxTroopsCount) 
 		{
 				error = true;
